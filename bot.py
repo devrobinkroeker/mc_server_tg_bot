@@ -35,10 +35,13 @@ def handle(msg):
         
         if message == '/weather clear':
             output = os.popen('docker exec '+ container +' rcon-cli weather clear').read()
+            bot.sendMessage(chat_id, output)
         if message == '/weather rain':
             output = os.popen('docker exec '+ container +' rcon-cli weather rain').read()
+            bot.sendMessage(chat_id, output)
         if message == '/weather thunder':
             output = os.popen('docker exec '+ container +' rcon-cli weather thunder').read()
+            bot.sendMessage(chat_id, output)
 
 bot = telepot.Bot(token)
 MessageLoop(bot, handle).run_as_thread()
