@@ -42,7 +42,7 @@ def handle(msg):
         else:
             bot.sendMessage(chat_id, 'Wrong password. Try again!')
 
-    if message == '/start' and loggedIn == False:
+    if message == '/start' and chat_id not in logged_in_users:
         bot.sendMessage(chat_id, 'Please enter your password:')
         waiting_for_pass = True
 
