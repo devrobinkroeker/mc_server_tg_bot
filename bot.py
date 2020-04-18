@@ -17,15 +17,15 @@ else:
 
 token = os.environ['TG_TOKEN']
 password = os.environ['TG_PASS']
-loggedIn = False
 waiting_for_pass = False
+logged_in_users = []
 
 def handle(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     message = msg['text']
-    global waiting_for_pass, password, loggedIn
+    global waiting_for_pass, password, logged_in_users
 
-    if loggedIn:
+    if chat_id in logged_in_users:
         
         if '/' in message:
             command = message.replace('/', '')
@@ -36,7 +36,7 @@ def handle(msg):
 
     if waiting_for_pass:
         if message == password:
-            loggedIn = True
+            logged_in_users.append(chat_id)
             bot.sendMessage(chat_id, 'Success. You can control your bot now!')
             waiting_for_pass = False
         else:
